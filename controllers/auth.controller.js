@@ -3,7 +3,7 @@ function getSignup(req, res) {
 }
 
 function getLogin(req, res) {
-  res.render("auth/signup");
+  res.render("auth/login");
 }
 
 module.exports = {

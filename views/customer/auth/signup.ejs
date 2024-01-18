@@ -1,0 +1,27 @@
+<%- include('../includes/head', {title: 'Signup'}) %>
+</head>
+<body>
+    <%- include('../includes/header') %>
+    <main>
+        <h1>Create New Account</h1>
+        <form action="/customer/signup" method="POST">
+            <div>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="confirm-email">Confirm Email</label>
+                <input type="email" name="confirm-email" id="confirm-email" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required>
+            </div>
+            <div>
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" name="confirmPassword" id="confirmPassword" required>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+    </main>
+<%- include('../includes/footer') %>
