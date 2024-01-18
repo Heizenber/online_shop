@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const db = require("../data/database");
+const database = require("../data/database");
 
 
 class User {
@@ -16,7 +16,7 @@ class User {
 
   async signup() {
     const hashedPassword = await bcrypt.hash(this.password, 12);
-    const db = getDb();
+    const db = database.getDb();
     await db.collection("users").insertOne({
         email: this.email,
         password: this.hashedPassword,
