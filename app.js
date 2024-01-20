@@ -4,6 +4,9 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const db = require('./data/database');
 
+const expressSession = require('express-session');
+const createSessionConfig = require('./config/session');
+
 const authRoutes = require('./routes/auth.routes');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-token');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
@@ -14,12 +17,16 @@ const { doubleCsrfProtection } = doubleCsrf({
     getSecret: () => 'my-secret',
   });
 
+const sessionConfig = createSessionConfig.createSessionConfig();
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(expressSession(sessionConfig))
 
 app.use(doubleCsrfProtection);
 app.use(addCsrfTokenMiddleware);
