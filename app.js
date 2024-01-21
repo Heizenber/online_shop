@@ -1,11 +1,12 @@
 const express = require('express');
-const { doubleCsrf } = require("csrf-csrf");
+const csrf = require('csurf');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const db = require('./data/database');
 
 const expressSession = require('express-session');
 const createSessionConfig = require('./config/session');
+const checkAuthStatus = require('./middlewares/check-auth');
 
 const authRoutes = require('./routes/auth.routes');
 const productsRoutes = require('./routes/products.routes');
@@ -15,9 +16,6 @@ const errorHandlerMiddleware = require('./middlewares/error-handler');
 
 
 const app = express();
-const { doubleCsrfProtection } = doubleCsrf({
-    getSecret: () => 'my-secret',
-  });
 
 const sessionConfig = createSessionConfig.createSessionConfig();
 
@@ -30,8 +28,9 @@ app.use(cookieParser());
 
 app.use(expressSession(sessionConfig))
 
-app.use(doubleCsrfProtection);
+app.use(csrf());
 app.use(addCsrfTokenMiddleware);
+app.use(checkAuthStatus);
 
 app.use(baseRoutes);
 app.use(authRoutes);

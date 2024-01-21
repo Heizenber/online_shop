@@ -7,22 +7,22 @@
         <main>
             <h1>Create New Account</h1>
             <form action="/signup" method="POST">
-                <!-- <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>"> -->
+                <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
+                    <input type="email" name="email" id="email" autocomplete="username" required>
                 </div>
                 <div>
                     <label for="confirm-email">Confirm Email</label>
-                    <input type="email" name="confirm-email" id="confirm-email" required>
+                    <input type="email" name="confirm-email" id="confirm-email" autocomplete="username" required>
                 </div>
                 <div>
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" minlength="6" required>
+                    <input type="password" name="password" id="password" autocomplete="new-password" minlength="6" required>
                 </div>
                 <div>
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" id="confirmPassword" required>
+                    <input type="password" name="confirmPassword" autocomplete="new-password" id="confirmPassword" required>
                 </div>
                 <hr>
                 <div>

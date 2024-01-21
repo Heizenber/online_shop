@@ -24,7 +24,7 @@ function getLogin(req, res) {
 
 async function login(req, res) {
   const user = new User(req.body.email, req.body.password);
-  const existingUser = await User.getUserWithSameEmail();
+  const existingUser = await user.getUserWithSameEmail();
 
   if (!existingUser) {
     res.redirect("/login");
@@ -43,8 +43,15 @@ async function login(req, res) {
   });
 }
 
+function logout(req, res) {
+  authUtil.destroyUserSession(req);
+  res.redirect("/");
+}
+
 module.exports = {
   getSignup,
   getLogin,
   signup,
+  login,
+  logout,
 };

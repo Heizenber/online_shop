@@ -3,6 +3,7 @@
 <body>
     <%- include('./includes/header') %>
         <main>
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
             <h1>Something went wrong on our side</h1>
             <p>Unfortunately, something went wrong - please try again later</p>
             <p><a class="btn" href="/">Back to main page!</a></p>
