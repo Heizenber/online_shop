@@ -32,10 +32,10 @@ async function signup(req, res, next) {
     city: req.body.city,
   };
 
-  const user = new User(...userData);
+  const user = new User(userData);
 
   if (
-    !validation.userCredentialsAreValid(user) ||
+    !validation.userDetailsAreValid(user) ||
     !validation.emailIsConfirmed(user, req.body["confirm-email"]) ||
     !validation.passwordIsConfirmed(user, req.body.confirmPassword)
   ) {
@@ -93,7 +93,7 @@ function getLogin(req, res) {
 }
 
 async function login(req, res, next) {
-  const user = new User(req.body.email, req.body.password);
+  const user = new User({email: req.body.email, password: req.body.password});
   let existingUser;
   try {
     existingUser = await user.getUserWithSameEmail();
@@ -101,6 +101,7 @@ async function login(req, res, next) {
     next(error);
     return;
   }
+
 
   const sessionErrorData = {
     errorMessage: "Invalid email or password.",

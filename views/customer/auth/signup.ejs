@@ -6,40 +6,46 @@
     <%- include('../../shared/includes/header') %>
         <main>
             <h1>Create New Account</h1>
+            <% if (inputData.errorMessage) { %>
+                <section class="alert">
+                    <h2>Invalid Input</h2>
+                    <p><%= inputData.errorMessage %></p>
+                </section>
+            <% } %>
             <form action="/signup" method="POST">
                 <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
                 <div>
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" autocomplete="username" required>
+                    <input type="email" name="email" value="<%= inputData.email %>" id="email" autocomplete="username" required>
                 </div>
                 <div>
-                    <label for="confirm-email">Confirm Email</label>
-                    <input type="email" name="confirm-email" id="confirm-email" autocomplete="username" required>
+                    <label for="confirm-email" >Confirm Email</label>
+                    <input type="email" name="confirm-email" value="<%= inputData.confirmEmail %>" id="confirm-email" autocomplete="username" required>
                 </div>
                 <div>
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" autocomplete="new-password" minlength="6" required>
+                    <label for="password" >Password</label>
+                    <input type="password" name="password" value="<%= inputData.password %>" id="password" autocomplete="new-password" minlength="6" required>
                 </div>
                 <div>
                     <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" name="confirmPassword" autocomplete="new-password" id="confirmPassword" required>
+                    <input type="password" name="confirmPassword" value="<%= inputData.confirmPassword %>" autocomplete="new-password" id="confirmPassword" required>
                 </div>
                 <hr>
                 <div>
                     <label for="fullname">Full Name</label>
-                    <input type="text" name="fullname" id="fullname" required>
+                    <input type="text" name="fullname" value="<%= inputData.fullname %>" id="fullname" required>
                 </div>
                 <div>
                     <label for="street">Street</label>
-                    <input type="text" name="street" id="street" required>
+                    <input type="text" name="street" value="<%= inputData.street %>" id="street" required>
                 </div>
                 <div>
                     <label for="postal">Postal Code</label>
-                    <input type="text" name="postal" id="postal" minlength="5" maxlength="5" required>
+                    <input type="text" name="postal" value="<%= inputData.postal %>" id="postal" minlength="5" maxlength="5" required>
                 </div>
                 <div>
                     <label for="city">City</label>
-                    <input type="text" name="city" id="city" required>
+                    <input type="text" name="city" value="<%= inputData.city %>" id="city" required>
                 </div>
                 <button class="btn" type="submit">Create Account</button>
                 <div id="switch-form"><a href="/login">Login instead</a></div>

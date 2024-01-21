@@ -3,14 +3,14 @@ const db = require("../data/database");
 
 
 class User {
-  constructor(email, password, fullname, street, postalcode, city) {
-    this.email = email;
-    this.password = password;
-    this.name = fullname;
+  constructor(data) {
+    this.email = data.email;
+    this.password = data.password;
+    this.name = data.fullname;
     this.address = {
-      street: street,
-      postalcode: postalcode,
-      city: city,
+      street: data.street,
+      postalcode: data.postalcode,
+      city: data.city,
     };
   }
 
