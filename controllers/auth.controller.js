@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const authUtil = require("../util/authentication");
+const userCredentialsAreValid = require("../util/validation");
 
 function getSignup(req, res) {
   res.render("customer/auth/signup");
@@ -11,9 +12,14 @@ async function signup(req, res, next) {
     req.body.password,
     req.body.fullname,
     req.body.street,
-    req.body.postalcode,
+    req.body.postal,
     req.body.city
   );
+
+  if (!userCredentialsAreValid(user)) {
+    res.redirect("/signup");
+    return;
+  }
 
   try {
     await user.signup();
