@@ -13,4 +13,16 @@ function userCredentialsAreValid(user) {
         user.password && user.password.trim().length >= 6
 }
 
-module.exports = userDetailsAreValid;
+function emailIsConfirmed(user, confirmedEmail) {
+    return user.email === confirmedEmail;
+}
+
+function passwordIsConfirmed(user, confirmedPassword) {
+    return user.password === confirmedPassword;
+}
+
+module.exports = {
+    userDetailsAreValid,
+    emailIsConfirmed,
+    passwordIsConfirmed,
+};

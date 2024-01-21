@@ -1,6 +1,6 @@
 const User = require("../models/user.model");
 const authUtil = require("../util/authentication");
-const userCredentialsAreValid = require("../util/validation");
+const validation = require("../util/validation");
 
 function getSignup(req, res) {
   res.render("customer/auth/signup");
@@ -16,14 +16,23 @@ async function signup(req, res, next) {
     req.body.city
   );
 
-  if (!userCredentialsAreValid(user)) {
+  if (
+    !validation.userCredentialsAreValid(user) ||
+    !validation.emailIsConfirmed(user, req.body["confirm-email"]) ||
+    !validation.passwordIsConfirmed(user, req.body.confirmPassword)
+  ) {
     res.redirect("/signup");
     return;
   }
 
   try {
+    const existsAlready = await user.existsAlready();
+    if (existsAlready) {
+      res.redirect("/signup");
+      return;
+    }
     await user.signup();
-  } catch(error) {
+  } catch (error) {
     next(error);
     return;
   }
@@ -39,7 +48,7 @@ async function login(req, res, next) {
   let existingUser;
   try {
     existingUser = await user.getUserWithSameEmail();
-  } catch(error) {
+  } catch (error) {
     next(error);
     return;
   }
@@ -49,7 +58,9 @@ async function login(req, res, next) {
     return;
   }
 
-  const passwordIsCorrect = await user.hasMatchingPassword(existingUser.password);
+  const passwordIsCorrect = await user.hasMatchingPassword(
+    existingUser.password
+  );
 
   if (!passwordIsCorrect) {
     res.redirect("/login");
