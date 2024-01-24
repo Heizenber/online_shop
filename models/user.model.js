@@ -9,7 +9,7 @@ class User {
     this.name = data.fullname;
     this.address = {
       street: data.street,
-      postalcode: data.postalcode,
+      postalcode: data.postal,
       city: data.city,
     };
   }
@@ -25,6 +25,7 @@ class User {
 
   async signup() {
     const hashedPassword = await bcrypt.hash(this.password, 12);
+    this.password = hashedPassword;
     await db.getDb().collection("users").insertOne({
         email: this.email,
         password: hashedPassword,

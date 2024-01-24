@@ -32,7 +32,9 @@ async function signup(req, res, next) {
     city: req.body.city,
   };
 
+
   const user = new User(userData);
+  
 
   if (
     !validation.userDetailsAreValid(user) ||
