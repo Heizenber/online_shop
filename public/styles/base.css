@@ -74,6 +74,18 @@ a {
     margin: var(--space-2);
 }
 
+.btn-alt {
+    background-color: transparent;
+    color: var(--color-primary-500);
+}
+
+.btn-alt:hover,
+.btn-alt:active {
+    background-color: var(--color-primary-500-bg);
+    border-color: var(--color-primary-500-bg);
+    color: white;
+}
+
 .btn:hover,
 .btn:active {
     background-color: var(--color-primary-700);
