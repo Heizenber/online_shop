@@ -9,6 +9,16 @@ class Product {
         this.summary = productData.summary;
         this.imagePath = `product-data/images/${productData.image}`;
         this.imageUrl = `/products/assets/images/${productData.image}`
+        if (productData._id) {
+            this._id = productData._id.toString();
+        }
+    }
+
+    static async findAll() {
+        const products = await db.getDb().collection('products').find().toArray();
+        return products.map((product) => {
+            return new Product(product);
+        });
     }
 
     async save() {
