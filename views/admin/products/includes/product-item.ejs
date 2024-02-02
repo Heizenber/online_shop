@@ -5,7 +5,9 @@
             <h2><%= product.title %></h2>
             <div class="product-item-actions">
                 <a class="btn btn-alt" href="/admin/products/<%= product._id %>">View & Edit</a>
-                <button class="btn btn-alt">Delete</button>
+                <form action="/admin/products/delete/<%= product._id %>?_csrf=<%= locals.csrfToken %>" method="POST">
+                    <button class="btn btn-alt">Delete</button>
+                </form>
             </div>
         </div>
     </article>
