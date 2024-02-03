@@ -77,9 +77,8 @@ class Product {
     this.updateImageData();
   }
 
-  static async deleteById(id) {
-    const productId = new ObjectId(id);
-    try {
+  remove() {
+    const productId = new ObjectId(this._id);
       // let product = await db
       // .getDb()
       // .collection("products")
@@ -93,11 +92,7 @@ class Product {
       //   throw error;
       // });
 
-      await db.getDb().collection("products").deleteOne({ _id: productId });
-    } catch (error) {
-      error.code = 500;
-      throw error;
-    }
+      return db.getDb().collection("products").deleteOne({ _id: productId });
   }
 }
 
