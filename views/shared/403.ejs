@@ -1,0 +1,11 @@
+<%- include('./includes/head', {title: 'Error' }) %>
+</head>
+<body>
+    <%- include('./includes/header') %>
+        <main>
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            <h1>Not Authorized!</h1>
+            <p>You are not authorized to visit this part of website</p>
+            <p><a class="btn" href="/">Back to main page!</a></p>
+        </main>
+        <%- include('./includes/footer') %>

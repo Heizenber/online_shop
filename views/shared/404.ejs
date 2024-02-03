@@ -1,0 +1,11 @@
+<%- include('./includes/head', {title: 'Error' }) %>
+</head>
+<body>
+    <%- include('./includes/header') %>
+        <main>
+            <input type="hidden" name="_csrf" value="<%= locals.csrfToken %>">
+            <h1>Page not found!</h1>
+            <p>Unfortunately, we could not find the requested resource</p>
+            <p><a class="btn" href="/">Back to main page!</a></p>
+        </main>
+        <%- include('./includes/footer') %>
