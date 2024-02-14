@@ -112,6 +112,15 @@ a {
     margin-bottom: var(--space-8);
 }
 
+.badge {
+    margin-left: var(--space-2);
+    padding: 0.06rem var(--space-1);
+    border-radius: 100%;
+    background-color: var(--color-primary-200-contrast);
+    color: var(--color-primary-500-contrast);
+    font-size: 0.75rem;
+}
+
 
 
 
